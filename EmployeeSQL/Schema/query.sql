@@ -5,7 +5,8 @@ ADD FOREIGN KEY (emp_no) REFERENCES employees(emp_no);
 ALTER TABLE dept_emp
 	ADD FOREIGN KEY (dept_no) REFERENCES departments(dept_no);
 	
-SELECT * FROM employees;
+SELECT * FROM employees
+WHERE emp_no = 499942;
 
 --list employee number, last name, first name, sex, and salary for each employee
 SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
@@ -71,6 +72,16 @@ SELECT last_name, COUNT(1) AS "Last Name Count"
 FROM employees
 GROUP BY last_name
 ORDER BY "Last Name Count" DESC;
+
+--creating table to create bar chart by title
+SELECT title, AVG(salary) AS "Average Salary"
+FROM
+    salaries
+    JOIN employees
+        ON employees.emp_no = salaries.emp_no
+    JOIN titles
+        ON titles.title_id = employees.emp_title_id
+GROUP BY title;
 	
 
 
